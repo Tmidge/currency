@@ -16,7 +16,7 @@ class CurrencyTest < Minitest::Test
   end
 
   def test_01_created_with_code_and_amount
-    ship = Currency.new("Dollars",100)
+    currency = Currency.new("Dollars",100)
     assert_equal "Dollars", currency.code
     assert_equal 100, currency.amount
   end
