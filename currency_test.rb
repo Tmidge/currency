@@ -21,4 +21,10 @@ class CurrencyTest < Minitest::Test
     assert_equal 100, currency.amount
   end
 
+  def test_02_equal_to_currency_with_the_same_code_and_amount
+    currency = Currency.new("Dollars",100)
+    currency1 = Currency.new("Dollars",100)
+    assert currency == currency1
+  end
+
 end
