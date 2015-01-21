@@ -1,4 +1,5 @@
 require './different_currency_code_error.rb'
+
 class Currency
   attr_accessor :code, :amount
   def initialize(code, amount)
@@ -7,11 +8,11 @@ class Currency
   end
 
   def +(other)
-      if @code == other.code
-        Currency.new(@code, @amount + other.amount)
-      else
-        raise DifferentCurrencyCodeError, "Don't do that."
-      end
+    if @code == other.code
+      Currency.new(@code, @amount + other.amount)
+    else
+      raise DifferentCurrencyCodeError, "Don't do that."
+    end
   end
 
   def ==(other)
