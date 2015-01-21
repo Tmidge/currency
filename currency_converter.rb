@@ -9,6 +9,8 @@ class CurrencyConverter
   def convert(currency, new_code)
     if currency.code == new_code
       return currency
+    else
+      return
     end
   end
 end
