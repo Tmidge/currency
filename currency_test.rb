@@ -79,15 +79,15 @@ class CurrencyTest < Minitest::Test
   #1.00000
   #0.86429	0.66186	61.5600	1.23583	1.23663	11.5544	1.32034	118.026
 
-  [{:USD => :1}{:EUR => :0.86}]
+  #[{:USD => :1,:EUR => :0.86}]
 
   def test_07_currency_converter_exists
     assert CurrencyConverter
   end
 
   def test_08_initialized_with_hash_of_codes_and_conversions
-    CurrencyConvertor.new([{:USD => :1}{:EUR => :0.86}])
-    assert_equal [{:USD => :1}{:EUR => :0.86}], CurrencyConvertor.codes
+    new_currency = CurrencyConverter.new({"USD" => 1,"EUR" => 0.86})
+    assert_equal ({"USD"=> 1 ,"EUR"=> 0.86}), new_currency.codes
   end
 
 end

@@ -1,5 +1,8 @@
 require './currency.rb'
 
-class CurrencyConverter(codes)
-  @codes = codes
+class CurrencyConverter
+  attr_accessor :codes
+  def initialize(codes)
+    @codes = codes
+  end
 end
