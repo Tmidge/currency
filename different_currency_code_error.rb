@@ -1,0 +1,3 @@
+class DifferentCurrencyCodeError < Exception
+
+end

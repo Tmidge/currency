@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './currency.rb'
+require './different_currency_code_error.rb'
 
  #Should be created with an amount and a currency code
  #Should equal another Currency object with the same amount and currency code
@@ -39,6 +40,22 @@ class CurrencyTest < Minitest::Test
     currency1 = Currency.new("Dollars",100)
     currency_sum = currency.amount - currency1.amount
     assert_equal 0, currency_sum
+  end
+
+  def test_05_no_adding_other_currencies_or_subtracting
+    currency = Currency.new("Yen",100)
+    currency1 = Currency.new("Dollars",100)
+    assert_raises(DifferentCurrencyCodeError) do
+      currency + currency1
+    end
+    assert_raises(DifferentCurrencyCodeError) do
+      currency - currency1
+    end
+  end
+
+  def test_06_multiplication_with_floats_and_fixnums
+    currency = Currency.new("Dollars",10)
+    assert_equal 33, currency * 3.3
   end
 
 end

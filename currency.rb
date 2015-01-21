@@ -1,3 +1,4 @@
+require './different_currency_code_error.rb'
 class Currency
   attr_accessor :code, :amount
   def initialize(code, amount)
@@ -6,7 +7,11 @@ class Currency
   end
 
   def +(other)
-    Currency.new(amount + other.amount)
+      if self.code == other.code
+        Currency.new(amount + other.amount)
+      else
+        raise DifferentCurrencyCodeError, "Don't do that."
+      end
   end
 
   def ==(other)
@@ -14,6 +19,15 @@ class Currency
   end
 
   def -(other)
-    Currency.new(amount - other.amount)
+    if self.code == other.code
+      Currency.new(amount - other.amount)
+    else
+      raise DifferentCurrencyCodeError, "Don't do that."
+    end
   end
+
+  def *(nums)
+    Currency.new(amount * nums)
+  end
+
 end
