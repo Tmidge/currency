@@ -11,8 +11,11 @@ class CurrencyConverter
 
       return currency
 
-    else
+    elsif currency.amount > codes[new_code]
       new_amount = currency.amount*codes[new_code]
+      return Currency.new(new_code , new_amount)
+    elsif currency.amount < codes[new_code]
+      new_amount = codes[new_code]/currency.amount
       return Currency.new(new_code , new_amount)
     end
   end

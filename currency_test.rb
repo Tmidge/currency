@@ -92,7 +92,7 @@ class CurrencyTest < Minitest::Test
 
   def test_09_converting_same_currency_code
     currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86})
-    assert_equal Currency.new(:USD, 1), currency_converter.convert(Currency.new(:USD, 1), :USD) 
+    assert_equal Currency.new(:USD, 1), currency_converter.convert(Currency.new(:USD, 1), :USD)
   end
 
   def test_10_converting_to_new_code
@@ -103,6 +103,6 @@ class CurrencyTest < Minitest::Test
   def test_11_converting_between_3_codes
     currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86, JPY: 118.02})
     assert_equal Currency.new(:JPY, 118.02), currency_converter.convert(Currency.new(:USD, 1), :JPY)
-    assert_in_delta Currency.new(:JPY, 137.21), currency_converter.convert(Currency.new(:EUR, 0.86), :JPY) , 0.05
+    assert_in_delta 137.21, currency_converter.convert(Currency.new(:EUR, 0.86), :JPY).amount, 0.05
   end
 end
