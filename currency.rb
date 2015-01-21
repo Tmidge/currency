@@ -12,4 +12,8 @@ class Currency
   def ==(other)
     amount == other.amount
   end
+
+  def -(other)
+    Currency.new(amount - other.amount)
+  end
 end
