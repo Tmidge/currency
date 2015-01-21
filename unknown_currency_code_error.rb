@@ -1,0 +1,3 @@
+class UnknownCurrencyCodeError < Exception
+  
+end

@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './currency.rb'
 require './different_currency_code_error.rb'
 require './currency_converter.rb'
+require './unknown_currency_code_error.rb'
 
 
 class CurrencyTest < Minitest::Test
@@ -99,10 +100,17 @@ class CurrencyTest < Minitest::Test
     currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86})
     assert_equal Currency.new(:EUR, 0.86), currency_converter.convert(Currency.new(:USD, 1), :EUR)
   end
-  #Should be able to be created with a Hash of three or more currency codes and conversion rates. An example would be this: {USD: 1.0, EUR: 0.74, JPY: 120.0}, which implies that a dollar is worth 0.74 euros and that a dollar is worth 120 yen, but also that a euro is worth 120/0.74 = 162.2 yen.
+
   def test_11_converting_between_3_codes
     currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86, JPY: 118.02})
     assert_equal Currency.new(:JPY, 118.02), currency_converter.convert(Currency.new(:USD, 1), :JPY)
-    assert_in_delta 137.21, currency_converter.convert(Currency.new(:EUR, 0.86), :JPY).amount, 0.05
+    assert_in_delta 137.21, currency_converter.convert(Currency.new(:EUR, 1), :JPY).amount, 0.025
+  end
+  #Should raise an UnknownCurrencyCodeError when you try to convert from or to a currency code it doesn't know about.
+  def test_12_no_converting_currencies_not_in_hash
+    currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86, JPY: 118.02})
+    assert_raises(UnknownCurrencyCodeError) do
+      currency_converter.convert(Currency.new(:USD, 1), :XYR)
+    end
   end
 end
