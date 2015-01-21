@@ -1,5 +1,5 @@
 require './currency.rb'
 
-class CurrencyConverter(codes = {})
+class CurrencyConverter(codes)
   @codes = codes
 end

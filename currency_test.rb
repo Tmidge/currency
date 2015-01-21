@@ -66,13 +66,28 @@ class CurrencyTest < Minitest::Test
   #
   #Currency.new should be able to take one argument with a currency symbol embedded in it, like "$1.20" or "€ 7.00", and figure out the correct currency code. It can also take two arguments like before, one being the amount and the other being the currency code.
 
+  #USD
+  #EUR
+  #GBP
+  #INR
+  #AUD
+  #CAD
+  #ZAR
+  #NZD
+  #JPY
+  #1 USD
+  #1.00000
+  #0.86429	0.66186	61.5600	1.23583	1.23663	11.5544	1.32034	118.026
+
+  [{:USD => :1}{:EUR => :0.86}]
+
   def test_07_currency_converter_exists
     assert CurrencyConverter
   end
 
   def test_08_initialized_with_hash_of_codes_and_conversions
-    CurrencyConvertor.new({})
-    assert ({}) == CurrencyConvertor.codes 
+    CurrencyConvertor.new([{:USD => :1}{:EUR => :0.86}])
+    assert_equal [{:USD => :1}{:EUR => :0.86}], CurrencyConvertor.codes
   end
 
 end
