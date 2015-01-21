@@ -92,11 +92,17 @@ class CurrencyTest < Minitest::Test
 
   def test_09_converting_same_currency_code
     currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86})
-    assert_equal currency_converter.convert(Currency.new(:USD, 1), :USD) , Currency.new(:USD, 1)
+    assert_equal Currency.new(:USD, 1), currency_converter.convert(Currency.new(:USD, 1), :USD) 
   end
-  #Should be able to take a Currency object that has one currency code it knows and a requested currency code and return a new Currency object with the right amount in the new currency code
+
   def test_10_converting_to_new_code
     currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86})
-    assert_equal currency_converter.convert(Currency.new(:USD, 1), :EUR) , Currency.new(:EUR, 0.86)
+    assert_equal Currency.new(:EUR, 0.86), currency_converter.convert(Currency.new(:USD, 1), :EUR)
+  end
+  #Should be able to be created with a Hash of three or more currency codes and conversion rates. An example would be this: {USD: 1.0, EUR: 0.74, JPY: 120.0}, which implies that a dollar is worth 0.74 euros and that a dollar is worth 120 yen, but also that a euro is worth 120/0.74 = 162.2 yen.
+  def test_11_converting_between_3_codes
+    currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86, JPY: 118.02})
+    assert_equal Currency.new(:JPY, 118.02), currency_converter.convert(Currency.new(:USD, 1), :JPY)
+    assert_in_delta Currency.new(:JPY, 137.21), currency_converter.convert(Currency.new(:EUR, 0.86), :JPY) , 0.05
   end
 end
