@@ -30,5 +30,8 @@ class Currency
   def *(nums)
     Currency.new(@code, @amount * nums)
   end
+  def /(nums)
+    Currency.new(@code, @amount / nums)
+  end
 
 end
