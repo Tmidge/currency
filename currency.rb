@@ -7,27 +7,27 @@ class Currency
   end
 
   def +(other)
-      if self.code == other.code
-        Currency.new(amount + other.amount)
+      if @code == other.code
+        Currency.new(@code, @amount + other.amount)
       else
         raise DifferentCurrencyCodeError, "Don't do that."
       end
   end
 
   def ==(other)
-    amount == other.amount
+    @amount == other.amount
   end
 
   def -(other)
-    if self.code == other.code
-      Currency.new(amount - other.amount)
+    if @code == other.code
+      Currency.new(@code, @amount - other.amount)
     else
       raise DifferentCurrencyCodeError, "Don't do that."
     end
   end
 
   def *(nums)
-    Currency.new(amount * nums)
+    Currency.new(@code, @amount * nums)
   end
 
 end

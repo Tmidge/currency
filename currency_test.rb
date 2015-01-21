@@ -31,15 +31,15 @@ class CurrencyTest < Minitest::Test
   def test_03_can_be_added
     currency = Currency.new("Dollars",100)
     currency1 = Currency.new("Dollars",100)
-    currency_added = currency.amount + currency1.amount
-    assert_equal 200, currency_added
+    currency_added = currency + currency1
+    assert_equal 200, currency_added.amount
   end
 
   def test_04_can_be_subtracted
     currency = Currency.new("Dollars",100)
     currency1 = Currency.new("Dollars",100)
-    currency_sum = currency.amount - currency1.amount
-    assert_equal 0, currency_sum
+    currency_sum = currency - currency1
+    assert_equal 0, currency_sum.amount
   end
 
   def test_05_no_adding_other_currencies_or_subtracting
@@ -55,7 +55,7 @@ class CurrencyTest < Minitest::Test
 
   def test_06_multiplication_with_floats_and_fixnums
     currency = Currency.new("Dollars",10)
-    assert_equal 33, currency * 3.3
+    assert_equal Currency.new("Dollars", 33), currency * 3.3
   end
 
 end
