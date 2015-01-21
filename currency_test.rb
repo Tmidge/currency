@@ -27,4 +27,18 @@ class CurrencyTest < Minitest::Test
     assert currency == currency1
   end
 
+  def test_03_can_be_added
+    currency = Currency.new("Dollars",100)
+    currency1 = Currency.new("Dollars",100)
+    currency_added = currency.amount + currency1.amount
+    assert_equal 200, currency_added
+  end
+
+  def test_04_can_be_subtracted
+    currency = Currency.new("Dollars",100)
+    currency1 = Currency.new("Dollars",100)
+    currency_sum = currency.amount - currency1.amount
+    assert_equal 0, currency_sum
+  end
+
 end
