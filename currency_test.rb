@@ -73,7 +73,7 @@ class CurrencyTest < Minitest::Test
   #AUD
   #CAD
   #ZAR
-  #NZD
+  #NZ
   #JPY
   #1 USD
   #1.00000
@@ -86,12 +86,13 @@ class CurrencyTest < Minitest::Test
   end
 
   def test_08_initialized_with_hash_of_codes_and_conversions
-    new_currency = CurrencyConverter.new({"USD" => 1,"EUR" => 0.86})
-    assert_equal ({"USD"=> 1 ,"EUR"=> 0.86}), new_currency.codes
+    new_currency = CurrencyConverter.new({USD: 1, EUR: 0.86})
+    assert_equal ({USD: 1, EUR: 0.86}), new_currency.codes
   end
   #(that is, currency_converter.convert(Currency.new(1, :USD), :USD) == Currency.new(1, :USD))
   def test_09_converting_same_currency_code
-    assert currency_converter.convert(Currency.new(1, :USD), :USD) == Currency.new(1, :USD)
+    currency_converter = CurrencyConverter.new({USD: 1, EUR: 0.86})
+    assert_equal currency_converter.convert(Currency.new(:USD, 1), :USD) , Currency.new(:USD, 1)
   end
 
 end
